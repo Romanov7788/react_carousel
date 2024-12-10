@@ -27,9 +27,18 @@ const Form: React.FC<FormProps> = ({
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
 
-    onChange({
-      [name]: type === 'checkbox' ? checked : +value,
-    });
+    const updatedValue =
+      type === 'checkbox' ? { [name]: checked } : { [name]: +value };
+
+    onChange(
+      updatedValue as {
+        step?: number;
+        frameSize?: number;
+        itemWidth?: number;
+        animationDuration?: number;
+        infinite?: boolean;
+      },
+    );
   };
 
   return (
